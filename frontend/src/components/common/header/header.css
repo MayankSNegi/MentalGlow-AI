@@ -1,0 +1,161 @@
+/*--------head------------*/
+.head {
+  padding: 20px 0;
+  color: #fff;
+}
+
+.headlogo h1 {
+  font-size: 40px;
+  font-weight: 900;
+}
+
+.headlogo h1:hover {
+  text-decoration: none;
+  text-shadow: 0 0 10px grey;
+  cursor: pointer;
+}
+
+.head {
+  margin-left: 10px;
+}
+
+.social {
+  display: flex;
+}
+
+.headicon {
+  width: 40px;
+  height: 40px;
+  color: white;
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  border: 1px solid white;
+  box-shadow: 0 0 10px #f5f6f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-right: 10px;
+  /* animation: neonGlow 1.5s infinite alternate; Apply animation */
+}
+
+.headicon:hover {
+  color: white;
+  background-color: #1eb2a6;
+}
+
+.social a {
+  color: white;
+  text-decoration: none;
+}
+
+.social a:visited {
+  color: white;
+}
+
+.social a:hover {
+  color: #d4d4d4;
+}
+
+/* @keyframes neonGlow {
+    0% {
+        box-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff, 0 0 20px #0ff;
+    }
+    100% {
+        box-shadow: 0 0 10px #ff0, 0 0 20px #ff0, 0 0 30px #ff0, 0 0 40px #ff0;
+    }
+}*/
+/*--------header------------*/
+header {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  margin: 0 30px;
+}
+
+header .nav {
+  display: flex !important;
+}
+
+header li {
+  margin-right: 40px;
+}
+
+header ul {
+  padding: 30px 20px;
+}
+
+header ul li a {
+  color: #fff;
+  font-weight: 500;
+  transition: 0.5s;
+}
+
+header ul li a:hover {
+  color: #1eb2a6;
+  text-decoration: none;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.start {
+  background-color: #1eb2a6;
+  padding: 30px 70px;
+  color: #fff;
+  clip-path: polygon(10% 0%, 100% 0, 100% 100%, 0% 100%);
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.start:hover {
+  opacity: 0.7;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.button {
+  text-decoration: none;
+  text-shadow: 0 0 10px currentColor;
+  color: white;
+  cursor: pointer;
+}
+
+.toggle {
+  display: none;
+}
+
+/*--------header------------*/
+@media screen and (max-width: 768px) {
+  .start {
+    clip-path: none;
+  }
+
+  header {
+    margin: 0;
+    background-color: #1eb2a6;
+    position: relative;
+  }
+
+  header ul.flexSB {
+    display: none;
+  }
+
+  header ul li {
+    margin-bottom: 20px;
+  }
+
+  .toggle {
+    display: block;
+    background: none;
+    color: #fff;
+    font-size: 30px;
+    position: absolute;
+    right: 0;
+    top: -20px;
+  }
+
+  .mobile-nav {
+    position: absolute;
+    top: 7vh;
+    left: 0;
+    width: 100%;
+    background-color: #7ef2e8;
+  }
+}

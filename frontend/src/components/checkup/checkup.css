@@ -1,0 +1,219 @@
+/* 🌿 General Section Styling */
+.checkup-section {
+  padding: 60px 0;
+  background-color: transparent;
+  font-family: "Poppins", sans-serif;
+}
+
+/* 📦 Form Container */
+.checkup-section .container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 40px 30px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(30, 178, 166, 0.25);
+  transition: all 0.3s ease-in-out;
+}
+
+/* 🧩 Headings */
+.checkup-section h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #1a535c;
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.checkup-section p {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #555;
+  font-size: 1rem;
+}
+
+.checkup-form h2 {
+  margin-top: 35px;
+  margin-bottom: 15px;
+  color: #1eb2a6;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-left: 4px solid #1eb2a6;
+  padding-left: 10px;
+}
+
+/* 🧾 Form Group */
+.checkup-form .form-group {
+  margin-bottom: 20px;
+}
+
+.checkup-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.required-star {
+  color: red;
+  margin-left: 5px;
+}
+
+/* 🧠 Input Fields */
+.checkup-form input[type="number"],
+.checkup-form input[type="text"],
+.checkup-form select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  box-sizing: border-box;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.checkup-form input[type="number"]:focus,
+.checkup-form input[type="text"]:focus,
+.checkup-form select:focus {
+  border-color: #1eb2a6;
+  box-shadow: 0 0 6px rgba(30, 178, 166, 0.3);
+  outline: none;
+}
+
+/* 🎚 Range Inputs (if used) */
+.checkup-form input[type="range"] {
+  width: 100%;
+  height: 6px;
+  background: #e1e1e1;
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.2s;
+}
+
+.checkup-form input[type="range"]:hover {
+  background: #d4f3ef;
+}
+
+.checkup-form input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1eb2a6;
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 0 2px #555;
+}
+
+.checkup-form input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #1eb2a6;
+  cursor: pointer;
+  border: 2px solid #fff;
+}
+
+/* ☑ Radio Buttons */
+.checkup-form .radio-group label {
+  display: inline-block;
+  margin-right: 20px;
+  font-weight: normal;
+}
+
+.checkup-form .radio-group input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* 🚀 Submit Button */
+.checkup-form .submit-button {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background-color: #1eb2a6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: 1px solid #0e8177;
+  margin-top: 30px;
+}
+
+.checkup-form .submit-button:hover {
+  background-color: #15998e;
+  transform: translateY(-2px);
+}
+
+/* ✅ Prediction Result Box */
+.prediction-result {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #e8fff6;
+  border: 1px solid #b7f3e5;
+  border-radius: 10px;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.prediction-result h2 {
+  color: #0c9b7e;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+/* ❌ Error Message */
+.error-message {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #fdecea;
+  border: 1px solid #f5c2c7;
+  border-radius: 8px;
+  text-align: center;
+  color: #c1121f;
+  font-weight: 500;
+  animation: shake 0.4s ease-in-out;
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  50% { transform: translateX(4px); }
+  75% { transform: translateX(-4px); }
+}
+
+/* 📱 Responsive Design */
+@media (max-width: 600px) {
+  .checkup-section .container {
+    padding: 25px 20px;
+  }
+
+  .checkup-form h2 {
+    font-size: 1.2rem;
+  }
+
+  .checkup-form label {
+    font-size: 0.9rem;
+  }
+
+  .checkup-form input,
+  .checkup-form select {
+    font-size: 0.9rem;
+  }
+
+  .checkup-form .submit-button {
+    font-size: 16px;
+  }
+}
