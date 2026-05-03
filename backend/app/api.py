@@ -5,8 +5,14 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.responses import Response
-import webbrowser, threading, time
+import os
+import time
 from pathlib import Path
+
+# Only import these for local use
+if os.environ.get("RENDER") is None:
+    import webbrowser
+    import threading
 
 from .model_utils import preprocess, model
 
@@ -16,13 +22,17 @@ from .model_utils import preprocess, model
 app = FastAPI(title="Mental-Health Predictor API")
 
 # -------------------------------------------------
-# 2️⃣ CORS for frontend
+# 2️⃣ CORS (dynamic for local + production)
 # -------------------------------------------------
-origins = [
-    "http://localhost",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+if os.environ.get("RENDER"):
+    origins = ["*"]  # allow all in production (can restrict later)
+else:
+    origins = [
+        "http://localhost",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -32,7 +42,7 @@ app.add_middleware(
 )
 
 # -------------------------------------------------
-# 3️⃣ Prevent cache - Always serve fresh frontend build
+# 3️⃣ Prevent cache
 # -------------------------------------------------
 class NoCacheMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request, call_next):
@@ -44,16 +54,16 @@ class NoCacheMiddleware(BaseHTTPMiddleware):
 
 app.add_middleware(NoCacheMiddleware)
 
-# Dynamic version based on startup time
 BUILD_VERSION = str(int(time.time()))
 
 # -------------------------------------------------
-# 4️⃣ Detect and serve frontend build dynamically
+# 4️⃣ Serve frontend ONLY in local (not needed on Render)
 # -------------------------------------------------
 frontend_dist = Path(__file__).resolve().parent.parent.parent / "frontend" / "dist"
 
-if frontend_dist.exists():
+if frontend_dist.exists() and os.environ.get("RENDER") is None:
     print(f"✅ Frontend build found at: {frontend_dist}")
+
     app.mount("/assets", StaticFiles(directory=frontend_dist / "assets"), name="assets")
     app.mount("/images", StaticFiles(directory=frontend_dist / "images"), name="images")
 
@@ -63,42 +73,43 @@ if frontend_dist.exists():
         response.headers["X-Build-Version"] = BUILD_VERSION
         return response
 else:
-    print(f"⚠️  Frontend build not found at: {frontend_dist}. Only API will run.")
+    print("⚠️ Running in API-only mode (Render or no frontend build found)")
 
 # -------------------------------------------------
-# 5️⃣ Prediction API
+# 5️⃣ Root endpoint (needed for Render health check)
+# -------------------------------------------------
+@app.get("/")
+def home():
+    return {"status": "MentalGlow API running"}
+
+# -------------------------------------------------
+# 6️⃣ Prediction API
 # -------------------------------------------------
 class InputData(BaseModel):
-    # Basic Demographics
     age: int
     gender: str
     city: str 
     relationship_status: str
 
-    # Lifestyle
     sleep_hours: float
     exercise_frequency: int
     screen_time_hours: float
     diet_quality: int
 
-    # Emotional & Mental Health
     stress_level: int
     anxiety_level: int
     mood: str
     motivation_level: int
     concentration_level: int
 
-    # Social & Work/Study
     social_support: int
     social_interaction_frequency: int
     work_stress: int
     is_student: int
     is_employed: int
 
-    # Household
     household_responsibility: int
 
-    # Awareness
     open_to_therapy: int
     aware_of_mental_health: int
 
@@ -115,15 +126,16 @@ def predict(data: InputData):
         raise HTTPException(status_code=500, detail=str(e))
 
 # -------------------------------------------------
-# 6️⃣ Health check route
+# 7️⃣ Test route
 # -------------------------------------------------
 @app.get("/test")
 def test_endpoint():
     return {"message": "Test endpoint is working!"}
 
 # -------------------------------------------------
-# 7️⃣ Auto-open browser
+# 8️⃣ Auto-open browser (ONLY LOCAL)
 # -------------------------------------------------
-def launch_browser():
-    webbrowser.open("http://127.0.0.1:8000/")
-threading.Timer(1.5, launch_browser).start()
+if os.environ.get("RENDER") is None:
+    def launch_browser():
+        webbrowser.open("http://127.0.0.1:8000/")
+    threading.Timer(1.5, launch_browser).start()
