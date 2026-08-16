@@ -43,11 +43,11 @@ const Footer = () => {
               </li>
               <li>
                 <i className='fa fa-phone-alt'></i>
-                +91 70******31
+                +91 70xxxxxx31
               </li>
               <li>
                 <i className='fa fa-paper-plane'></i>
-                mentalglow-ai@gmail.com
+                mxxxxxi@gmail.com
               </li>
             </ul>
           </div>
@@ -55,7 +55,7 @@ const Footer = () => {
       </footer>
       <div className='legal'>
         <p>
-          <a href="/">© 2025 MentalGlow-ai. All rights reserved.</a>
+          <a href="/">© 2026 MentalGlow-ai. All rights reserved.</a>
         </p>
       </div>
     </>

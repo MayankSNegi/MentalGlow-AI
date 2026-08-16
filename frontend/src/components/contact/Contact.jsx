@@ -26,11 +26,11 @@ const Contact = () => {
               </div>
               <div className='box'>
                 <h4>EMAIL:</h4>
-                <p>mentalglow-ai@gmail.com</p>
+                <p>mxxxxxi@gmail.com</p>
               </div>
               <div className='box'>
                 <h4>PHONE:</h4>
-                <p>+91 70******31</p>
+                <p>+91 70xxxxxx31</p>
               </div>
             </div>
 
